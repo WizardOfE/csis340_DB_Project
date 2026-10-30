@@ -1,0 +1,30 @@
+services:                 #defines all the containers (VMs) we want
+  project-api:
+    build: ./food-app
+    ports:
+     - "3002:3000"
+    env_file:
+      - .env 
+    restart: unless-stopped
+    networks:
+      - food-project
+    depends_on:
+      - project-db
+  project-db:             #the name of a container (service) we are defining
+    image: postgres:16    #the image (template) to build our container from i.e use vanilla postgres 16
+    ports:                 
+      - "5434:5432"       # 'outside' port : 'inside' port i.e. traffic to the host os on 5434 is routed to
+                          # port 5432 on this container
+    env_file:
+      - .env              # specify the name of the env file to look for
+    volumes:              # like ports, 'outside' path : 'inside' path
+      - ./products_ddl.sql:/docker-entrypoint-initdb.d/init.sql  # setup-db.sql is mapped to init.sql
+      - ./pgdata:/var/lib/postgresql/data                    #pgdata is mapped to /var/... i.e. postgres' 
+    restart: unless-stopped                                  #data storage
+    networks:             # what networks the container is on
+      - food-project       # the docker network (defined later)
+
+
+networks:                 #defining docker networks
+  food-project:            #create a new network called project-net
+    name: food-project     #specify the name project-net

@@ -1,0 +1,6 @@
+!.gitignore
+/food-app/node_modules
+/content/products.jsonl
+ecosystem.config.js
+.env
+pgdata/

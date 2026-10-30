@@ -1,0 +1,16 @@
+{
+  "name": "csis340-food-app",
+  "version": "1.0.0",
+  "description": "for database systems",
+  "type": "commonjs",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.3",
+    "pg": "^8.23.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  }
+}

@@ -1,5 +1,9 @@
 begin;
 
+CREATE DATABASE foods;
+
+\c foods
+
 -- creating food products
 
 CREATE TABLE food_product (

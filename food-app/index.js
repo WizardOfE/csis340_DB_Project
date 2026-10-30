@@ -9,4 +9,4 @@ app.get("/", (req, res) => {
 	res.sendFile(__dirname + '/html/index.html');
 });
 
-app.listen(3002, () => console.log("listening on port 3002"))
+app.listen(3000, () => console.log("listening on port 3000"))
