@@ -31,9 +31,7 @@ CREATE TABLE vitamin (
 
 CREATE TABLE ingredient (
     name varchar,
-    wikidata varchar primary key,
-    parent varchar,
-    child varchar
+    wikidata varchar primary key
 );
 
 
@@ -43,24 +41,24 @@ CREATE TABLE additive (
     name varchar,
     is_vegan bit,
     is_vegetarian bit,
-    code varchar primary key
+    code INTEGER primary key
 );
 
 
 -- creating nutrient
 
 CREATE TABLE nutrient (
-    name varchar,
+    name varchar primary key,
     measuring_unit varchar,
-    id varchar primary key
+    wikidata varchar
 );
 
 
 -- creating allergen
 
 CREATE TABLE allergen (
-    name varchar,
-    wikidata varchar primary key
+    name varchar primary key,
+    wikidata varchar
 );
 
 
