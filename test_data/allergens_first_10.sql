@@ -1,0 +1,12 @@
+begin;
+INSERT INTO food_product (name, wikidata) VALUES ("Milk", "unknown");
+INSERT INTO food_product (name, wikidata) VALUES ("Lupin", "Q156811");
+INSERT INTO food_product (name, wikidata) VALUES ("Soybeans", "unknown");
+INSERT INTO food_product (name, wikidata) VALUES ("Kiwi", "unknown");
+INSERT INTO food_product (name, wikidata) VALUES ("Molluscs", "Q1275863");
+INSERT INTO food_product (name, wikidata) VALUES ("Peanuts", "Q7157933");
+INSERT INTO food_product (name, wikidata) VALUES ("Matsutake", "unknown");
+INSERT INTO food_product (name, wikidata) VALUES ("Fish", "Q600396");
+INSERT INTO food_product (name, wikidata) VALUES ("Peach", "unknown");
+INSERT INTO food_product (name, wikidata) VALUES ("Yamaimo", "unknown");
+INSERT INTO food_product (name, wikidata) VALUES ("Orange", "unknown");

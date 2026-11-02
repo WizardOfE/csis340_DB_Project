@@ -1,0 +1,12 @@
+begin;
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E357 - Potassium adipate", 1, 1, 357);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E308 - Gamme-tocopherol", 1, 1, 308);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E486 - Calcium stearoyl fumarate", 1, 1, 486);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E1208 - Polyvinylpyrrolidone-vinyl acetate copolymer", 0, 0, 1208);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E101i - Riboflavin", 0, 0, 101);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E214 - Ethyl p-hydroxybenzoate", 1, 1, 214);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E927a - Azodicarbonamide", 1, 1, 927a);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E225 - Calcium Disulphite", 1, 1, 225);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E641 - Leucine", 1, 1, 641);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E224 - Potassium metabisulphite", 1, 1, 224);
+INSERT INTO food_product (name, is_vegan, is_vegetarian, code) VALUES ("E215 - Sodium ethyl p-hydroxybenzoate", 1, 1, 215);

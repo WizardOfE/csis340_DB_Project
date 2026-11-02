@@ -1,0 +1,14 @@
+begin;
+begin;
+begin;
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Butyric acid", "g", "Q193213");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Vitamin B3/PP (Niacin)", "mg", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Lignoceric acid", "g", "Q422634");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Erucic acid", "g", "Q413531");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Soluble fiber", "g", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Alpha-linolenic acid", "g", "Q256502");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Iron", "mg", "Q677");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Zinc", "mg", "Q758");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Alcohol", "% vol", "Q156");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Phosphorus", "mg", "Q674");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Beta-glucan", "g", "Q2076617");
