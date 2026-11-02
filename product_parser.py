@@ -48,7 +48,7 @@ for data in parse_jsonl(filename):
         outfile.write(write_string)
 
 
-    # DEBUG: limit results in loop
+    # FIXME: DEBUG, limit results returned by loop
     if i == 10:
         break
     else:

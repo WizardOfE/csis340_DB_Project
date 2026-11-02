@@ -4,3 +4,5 @@
 ecosystem.config.js
 .env
 pgdata/
+/other-items/
+products.jsonl
