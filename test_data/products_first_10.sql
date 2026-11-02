@@ -1,0 +1,11 @@
+begin;
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000011, "Lagg's, chamomile herbal tea", "1 TEA BAG (1 g)", "unknown", unknown, "1", 80, "LAGG'S");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000042, "Lagg's, herbal tea, peppermint", "1.61 ONZ (45 g)", "unknown", unknown, "1", 80, "LAGG'S");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000059, "Linden Flowers Tea", "1.5 g (1.5 g)", "unknown", unknown, "unknown", unknown, "unknown");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000073, "Herbal Tea, Hibiscus", "1.5 g (1 TEA BAG)", "unknown", unknown, "unknown", unknown, "unknown");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000196, "Apple & Cinnamon Tea", "1.5 g (1 TEA BAG)", "unknown", unknown, "4", 80, "unknown");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000219, "Lagg's, green tea", "1.06 ONZ (30 g)", "unknown", unknown, "1", 80, "LAGG'S");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000318, "Lagg's, shave grass herbal tea", "1.06 ONZ (30 g)", "unknown", unknown, "unknown", 80, "LAGG'S");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000356, "Lagg's, herbal tea, chamomile * mint", "1.06 ONZ (30 g)", "unknown", unknown, "unknown", 80, "LAGG'S");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000363, "Artichoke Herbal Tea", "30 g (1.06 oz)", "unknown", unknown, "unknown", unknown, "unknown");
+INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES (0000105000417, "Lagg's, dieter's herbal tea", "1.61 ONZ (45 g)", "unknown", 0, "1", 80, "LAGG'S");
