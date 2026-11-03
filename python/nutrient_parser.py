@@ -30,20 +30,21 @@ outfile.write("begin;\n")
 # Usage
 for data in parse_json(filename):
     for obj in data:
-        write_string = "INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ("
-        for field in json_field_names:
-            write_string += "\'" + str(data[obj][field]["en"]).replace("'", "''") + "\'" if field in data[obj] and "en" in data[obj][field] else "\'unknown\'"
-            write_string += ", " if field != "wikidata" else ");\n"
+        if "zz:vit" not in obj:
+            write_string = "INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ("
+            for field in json_field_names:
+                write_string += "\'" + str(data[obj][field]["en"]).replace("'", "''") + "\'" if field in data[obj] and "en" in data[obj][field] else "\'unknown\'"
+                write_string += ", " if field != "wikidata" else ");\n"
 
-        write_string = write_string.replace("\'unknown\'", "NULL")
-        write_string = write_string.replace("unknown", "NULL")
-        outfile.write(write_string)
+            write_string = write_string.replace("\'unknown\'", "NULL")
+            write_string = write_string.replace("unknown", "NULL")
+            outfile.write(write_string)
 
 
-        # FIXME: DEBUG, limit results returned by loop
-        if i == 10:
-            break
-        else:
-            i += 1
+            # FIXME: DEBUG, limit results returned by loop
+            if i == 10:
+                break
+            else:
+                i += 1
 
 outfile.close()
