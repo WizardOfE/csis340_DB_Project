@@ -12,3 +12,15 @@ INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Zinc", "mg", 
 INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Alcohol", "% vol", "Q156");
 INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Phosphorus", "mg", "Q674");
 INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("Beta-glucan", "g", "Q2076617");
+begin;
+begin;
+begin;
+begin;
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("unknown", "unknown", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("unknown", "unknown", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("unknown", "unknown", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("unknown", "unknown", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("unknown", "unknown", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("unknown", "unknown", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("unknown", "unknown", "unknown");
+INSERT INTO food_product (name, measuring_unit, wikidata) VALUES ("unknown", "unknown", "unknown");

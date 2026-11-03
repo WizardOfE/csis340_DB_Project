@@ -39,9 +39,9 @@ CREATE TABLE ingredient (
 
 CREATE TABLE additive (
     name varchar,
-    is_vegan bit,
-    is_vegetarian bit,
-    code INTEGER primary key
+    is_vegan BOOLEAN,
+    is_vegetarian BOOLEAN,
+    code VARCHAR(255) primary key -- seams to not be int
 );
 
 
