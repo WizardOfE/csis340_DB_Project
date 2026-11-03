@@ -22,8 +22,9 @@ CREATE TABLE food_product (
 -- creating vitamin
 
 CREATE TABLE vitamin (
-    name VARCHAR(255),
-    id VARCHAR(255) primary key
+    name varchar primary key,
+    measuring_unit varchar,
+    wikidata varchar
 );
 
 
