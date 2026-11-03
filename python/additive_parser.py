@@ -6,8 +6,7 @@ filename = "other-items/additives.json"
 out_path = "test_data/additives_first_10.sql"
 json_field_names =  ["name",
                      "vegan",
-                     "vegetarian",
-                     "e_number"
+                     "vegetarian"
                      ]
 non_string_fields = [
                      ]
@@ -31,7 +30,7 @@ for data in common.parse_json(filename):
                 else:
                     write_string += str(data[obj][field]["en"]).replace("'","''") if field in data[obj] and "en" in data[obj][field] else "unknown"
                 write_string += "\'" if field not in non_string_fields else ""
-                write_string += ", " if field != "e_number" else ");\n"
+                write_string += ", " if field != "vegetarian" else (", \'" + obj[4:] + "\');\n")
             outfile.write(write_string)
 
 
