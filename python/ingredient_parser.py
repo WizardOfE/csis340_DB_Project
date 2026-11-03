@@ -34,6 +34,9 @@ for data in parse_json(filename):
             for field in json_field_names:
                 write_string += "\'" + str(data[obj][field]["en"]).replace("'", "''") + "\'" if field in data[obj] and "en" in data[obj][field] else "\'unknown\'"
                 write_string += ", " if field != "wikidata" else ");\n"
+
+            write_string = write_string.replace("\'unknown\'", "NULL")
+            write_string = write_string.replace("unknown", "NULL")
             outfile.write(write_string)
 
 

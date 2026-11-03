@@ -45,6 +45,9 @@ for data in parse_jsonl(filename):
             write_string += ", " if field != "brand_owner" else ");\n"
             # write_string += data["_id"] + ", " + data["product_name"] + ", " + data["serving_size"] + ", " + data["nutriscore_group"] + ", " + data[] + ", " + data["nova_group"] + ", " + data["ecoscore_score"] + ", " + data["brand_owner"]
         # write to a file
+
+        write_string = write_string.replace("\'unknown\'", "NULL")
+        write_string = write_string.replace("unknown", "NULL")
         outfile.write(write_string)
 
 

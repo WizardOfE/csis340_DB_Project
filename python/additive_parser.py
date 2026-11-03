@@ -31,6 +31,9 @@ for data in common.parse_json(filename):
                     write_string += str(data[obj][field]["en"]).replace("'","''") if field in data[obj] and "en" in data[obj][field] else "unknown"
                 write_string += "\'" if field not in non_string_fields else ""
                 write_string += ", " if field != "vegetarian" else (", \'" + obj[4:] + "\');\n")
+
+            write_string = write_string.replace("\'unknown\'", "NULL")
+            write_string = write_string.replace("unknown", "NULL")
             outfile.write(write_string)
 
 

@@ -1,12 +1,12 @@
 begin;
 INSERT INTO ingredient (name, wikidata) VALUES ('Manganese sulfate', 'Q409393');
-INSERT INTO ingredient (name, wikidata) VALUES ('Black mustard seed', 'unknown');
+INSERT INTO ingredient (name, wikidata) VALUES ('Black mustard seed', NULL);
 INSERT INTO ingredient (name, wikidata) VALUES ('Absinthe', 'Q170210');
-INSERT INTO ingredient (name, wikidata) VALUES ('Beans', 'unknown');
-INSERT INTO ingredient (name, wikidata) VALUES ('Chopped hazelnuts', 'unknown');
-INSERT INTO ingredient (name, wikidata) VALUES ('Natural fig flavouring', 'unknown');
-INSERT INTO ingredient (name, wikidata) VALUES ('Spirulina concentrate', 'unknown');
+INSERT INTO ingredient (name, wikidata) VALUES ('Beans', NULL);
+INSERT INTO ingredient (name, wikidata) VALUES ('Chopped hazelnuts', NULL);
+INSERT INTO ingredient (name, wikidata) VALUES ('Natural fig flavouring', NULL);
+INSERT INTO ingredient (name, wikidata) VALUES ('Spirulina concentrate', NULL);
 INSERT INTO ingredient (name, wikidata) VALUES ('Marigold', 'Q145930');
 INSERT INTO ingredient (name, wikidata) VALUES ('White cabbage', 'Q35051');
-INSERT INTO ingredient (name, wikidata) VALUES ('Betaglucan', 'unknown');
+INSERT INTO ingredient (name, wikidata) VALUES ('Betaglucan', NULL);
 INSERT INTO ingredient (name, wikidata) VALUES ('Betula', 'Q25243');

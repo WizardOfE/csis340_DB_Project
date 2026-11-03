@@ -1,9 +1,9 @@
 begin;
 INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Butyric acid', 'g', 'Q193213');
-INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Vitamin B3/PP (Niacin)', 'mg', 'unknown');
+INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Vitamin B3/PP (Niacin)', 'mg', NULL);
 INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Lignoceric acid', 'g', 'Q422634');
 INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Erucic acid', 'g', 'Q413531');
-INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Soluble fiber', 'g', 'unknown');
+INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Soluble fiber', 'g', NULL);
 INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Alpha-linolenic acid', 'g', 'Q256502');
 INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Iron', 'mg', 'Q677');
 INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ('Zinc', 'mg', 'Q758');
