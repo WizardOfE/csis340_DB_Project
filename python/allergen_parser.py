@@ -30,9 +30,9 @@ outfile.write("begin;\n")
 for data in parse_json(filename):
     for obj in data:
         if obj[0:2] == "en":
-            write_string = "INSERT INTO food_product (name, wikidata) VALUES ("
+            write_string = "INSERT INTO allergen (name, wikidata) VALUES ("
             for field in json_field_names:
-                write_string += "\"" + str(data[obj][field]["en"]) + "\"" if field in data[obj] and "en" in data[obj][field] else "\"unknown\""
+                write_string += "\'" + str(data[obj][field]["en"]).replace("'", "''") + "\'" if field in data[obj] and "en" in data[obj][field] else "\'unknown\'"
                 write_string += ", " if field != "wikidata" else ");\n"
             outfile.write(write_string)
 

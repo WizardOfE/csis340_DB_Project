@@ -36,11 +36,11 @@ for data in parse_jsonl(filename):
         for field in json_field_names:
             # add data[field] if exists, else add "unknown"
             # + " for string fields
-            write_string += "" if (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score") else "\""
+            write_string += "" if (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score") else "\'"
             # + field data
-            write_string += str(data[field]) if field in data else "unknown"
+            write_string += str(data[field]).replace("'", "''") if field in data else "unknown"
             # + closing " for string fields
-            write_string += "" if (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score") else "\""
+            write_string += "" if (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score") else "\'"
             # comma delimited but for the last field
             write_string += ", " if field != "brand_owner" else ");\n"
             # write_string += data["_id"] + ", " + data["product_name"] + ", " + data["serving_size"] + ", " + data["nutriscore_group"] + ", " + data[] + ", " + data["nova_group"] + ", " + data["ecoscore_score"] + ", " + data["brand_owner"]
