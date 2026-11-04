@@ -11,3 +11,4 @@ pgdata/
 /other-items/
 products.jsonl
 __pycache__/
+/test_data/

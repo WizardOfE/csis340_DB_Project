@@ -19,7 +19,9 @@ outfile = common.createOutFile(out_path) # on shared thing to make things consis
 
 # Usage
 for data in common.parse_json(filename):
-    if data["languages_tags"][0] == "en:english":
+    if "countries_tags" not in data: 
+        continue
+    if "united-states" in data["countries_tags"]:
         # assemble INSERT statements
         write_string = "INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES ("
         for field in json_field_names:
@@ -41,9 +43,9 @@ for data in common.parse_json(filename):
 
 
     # FIXME: DEBUG, limit results returned by loop
-    if i == 10:
-        break
-    else:
-        i += 1
+    # if i == 10:
+    #     break
+    # else:
+    #     i += 1
 
 outfile.close()

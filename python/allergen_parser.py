@@ -1,5 +1,6 @@
 import json
 import string
+import common
 
 filename = "other-items/allergens.json"
 out_path = "test_data/allergens_first_10.sql"
@@ -29,9 +30,9 @@ for data in common.parse_json(filename):
 
 
             # FIXME: DEBUG, limit results returned by loop
-            if i == 10:
-                break
-            else:
-                i += 1
+            # if i == 10:
+            #     break
+            # else:
+            #     i += 1
 
 outfile.close()

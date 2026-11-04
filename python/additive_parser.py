@@ -16,7 +16,7 @@ bit_fields =        ["vegan",
 
 
 i = 0
-outfile = common.createOutFile(out_path)
+outfile = common.createOutFile(out_path) # on shared thing to make things consistant
 # Usage
 for data in common.parse_json(filename):
     for obj in data:

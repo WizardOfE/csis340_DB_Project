@@ -12,18 +12,6 @@ json_field_names = ["name",
 # non_string_fields = ["FIXME",
 #                      ]
 
-def parse_json(file_path):
-    """Parse JSON"""
-    with open(file_path, 'r') as file:
-        for line in file:
-            line = line.strip()
-            if line:
-                try:
-                    yield json.loads(line)
-                except json.JSONDecodeError as e:
-                    print(f"Error parsing line: {e}")
-                    continue
-
 i = 0
 outfile = common.createOutFile(out_path) # on shared thing to make things consistant
 # Usage
@@ -41,9 +29,9 @@ for data in common.parse_json(filename):
 
 
             # FIXME: DEBUG, limit results returned by loop
-            if i == 10:
-                break
-            else:
-                i += 1
+            # if i == 10:
+            #     break
+            # else:
+            #     i += 1
 
 outfile.close()
