@@ -1,0 +1,14 @@
+begin;
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000111301201, 'milk');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000111301201, 'soybeans');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000111301263, 'milk');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000127534587, 'gluten');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000159479269, 'milk');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000159479269, 'soybeans');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000159487776, 'milk');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000159487776, 'soybeans');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000168175589, 'gluten');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000168175589, 'milk');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000168178238, 'gluten');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000168178238, 'milk');
+INSERT INTO food_allergen (food_barcode, allergen_name) values (0000168178238, 'soybeans');

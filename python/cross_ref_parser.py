@@ -3,22 +3,16 @@ import string
 import common
 
 pro_filename = "../content/products.jsonl"
-out_path = "../test_data/cross_ref_table_first_10.sql"
 add_filename = "../content/additives.json"
 all_filename = "../content/allergens.json"
 ing_filename = "../content/ingredients.json"
 nut_filename = "../content/nutrients.json"
+add_outfile = "../test_data/food_add_cross_ref_table_first_10.sql"
+all_outfile = "../test_data/food_all_cross_ref_table_first_10.sql"
+ing_outfile = "../test_data/food_ing_cross_ref_table_first_10.sql"
+nut_outfile = "../test_data/food_nut_cross_ref_table_first_10.sql"
+vit_outfile = "../test_data/food_vit_cross_ref_table_first_10.sql"
 
-# search_strings = {
-#     "food_vitamin" : sources > fields
-#     "food_ingredient" : ingredients_tags 
-#     "food_additive" : additives_tags
-#     "food_nutrient" : sources > fields
-#     "food_allergen" : allergens_tags
-# }
-
-i = 0
-outfile = common.createOutFile(out_path) # on shared thing to make things consistant
 
 # load dicts of ingredient names
 possible_ingredients = {}
@@ -64,16 +58,23 @@ print(f"# of additives: {add_count}\n" +
       f"# of nutrients: {nut_count}\n" +
       f"# of vitamins: {vit_count}\n")
 
+allergen_out = common.createOutFile(all_outfile)
+additive_out = common.createOutFile(add_outfile)
+ingredient_out = common.createOutFile(ing_outfile)
+nutrient_out = common.createOutFile(nut_outfile)
+vitamin_out = common.createOutFile(vit_outfile)
+
+i = 0
 # Usage
 for data in common.parse_json(pro_filename):
     # DEBUG: limiting products parsed
-    if i > 108:
+    if i > 30:
         break
-    # else:
-    #     i += 1
+    else:
+        i += 1
 
     # check if record is relevant (is english)
-    if "en:united-states" in data["countries_tags"] and i > 107:
+    if "en:united-states" in data["countries_tags"]:
 
         # start filling set, use search strings, normalize found strings
         if "ingredients_tags" in data:
@@ -83,19 +84,19 @@ for data in common.parse_json(pro_filename):
                     write_string = f"INSERT INTO food_ingredient (food_barcode, ingredient_name) values ({data["_id"]}, '{ingredient[3:]}');\n"
                     # write the strings to file
                     # DEBUG: print(f"{ingredient[3:]}: {write_string}")
-                    outfile.write(write_string)
+                    ingredient_out.write(write_string)
 
         if "additives_tags" in data:
             for additive in data["additives_tags"]:
                 if additive[3:] in possible_additives:
-                    write_string = f"INSERT INTO food_additive (food_barcode, additive_code) values ({data["_id"]}, '{additive[3:]}');\n"
-                    outfile.write(write_string)
+                    write_string = f"INSERT INTO food_additive (food_barcode, additive_code) values ({data["_id"]}, '{additive[4:]}');\n"
+                    additive_out.write(write_string)
 
         if "allergens_tags" in data:
             for allergen in data["allergens_tags"]:
                 if allergen[3:] in possible_allergens:
                     write_string = f"INSERT INTO food_allergen (food_barcode, allergen_name) values ({data["_id"]}, '{allergen[3:]}');\n"
-                    outfile.write(write_string)
+                    allergen_out.write(write_string)
 
         if "sources" in data:
             for element in data["sources"][0]["fields"]:
@@ -104,16 +105,18 @@ for data in common.parse_json(pro_filename):
                     if "vitamin" in element:
                         if element[10:] in possible_vitamins:
                             write_string = f"INSERT INTO food_vitamin (food_barcode, vitamin_name) values ({data["_id"]}, '{element[10:]}');\n"
-                            outfile.write(write_string)
+                            vitamin_out.write(write_string)
                     # field is just a nutrient
                     else:
                         if element[10:] in possible_nutrients:
                             write_string = f"INSERT INTO food_nutrient (food_barcode, nutrient_name) values ({data["_id"]}, '{element[10:]}');\n"
-                            outfile.write(write_string)
+                            nutrient_out.write(write_string)
                     # write_string will have been edited, so write it
-    else:
-        i += 1
 
 
 
-outfile.close()
+allergen_out.close()
+additive_out.close()
+ingredient_out.close()
+nutrient_out.close()
+vitamin_out.close()
