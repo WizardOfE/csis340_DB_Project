@@ -1,6 +1,10 @@
 !.gitignore
 /food-app/node_modules
 /content/products.jsonl
+/content/additives.json
+/content/allergens.json
+/content/ingredients.json
+/content/nutrients.json
 ecosystem.config.js
 .env
 pgdata/
