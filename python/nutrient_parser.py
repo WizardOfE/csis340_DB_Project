@@ -1,8 +1,9 @@
 import json
 import string
+import common
 
-filename = "other-items/nutrients.json"
-out_path = "test_data/nutrient_first_10.sql"
+filename = "../other-items/nutrients.json"
+out_path = "../test_data/nutrient_first_10.sql"
 json_field_names = ["name",
                     "unit",
                     "wikidata"
@@ -12,23 +13,11 @@ json_field_names = ["name",
 # non_string_fields = ["FIXME",
 #                      ]
 
-def parse_json(file_path):
-    """Parse JSON"""
-    with open(file_path, 'r') as file:
-        for line in file:
-            line = line.strip()
-            if line:
-                try:
-                    yield json.loads(line)
-                except json.JSONDecodeError as e:
-                    print(f"Error parsing line: {e}")
-                    continue
-
 i = 0
-outfile = open(out_path, 'a')
-outfile.write("begin;\n")
+outfile = common.createOutFile(out_path) # on shared thing to make things consistant
+
 # Usage
-for data in parse_json(filename):
+for data in common.parse_json(filename):
     for obj in data:
         if "zz:vit" not in obj:
             write_string = "INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES ("

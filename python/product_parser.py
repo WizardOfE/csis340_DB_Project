@@ -1,8 +1,9 @@
 import json
 import string
+import common
 
-filename = "products.jsonl"
-out_path = "test_data/products_first_10.sql"
+filename = "../content/products.jsonl"
+out_path = "../test_data/products_first_10.sql"
 json_field_names = ["_id", 
                     "product_name",
                     "serving_size",
@@ -13,23 +14,11 @@ json_field_names = ["_id",
                     "brand_owner"
                     ]
 
-def parse_jsonl(file_path):
-    """Parse a JSONL file line by line"""
-    with open(file_path, 'r') as file:
-        for line in file:
-            line = line.strip()
-            if line:
-                try:
-                    yield json.loads(line)
-                except json.JSONDecodeError as e:
-                    print(f"Error parsing line: {e}")
-                    continue
-
 i = 0
-outfile = open(out_path, 'a')
-outfile.write("begin;\n")
+outfile = common.createOutFile(out_path) # on shared thing to make things consistant
+
 # Usage
-for data in parse_jsonl(filename):
+for data in common.parse_json(filename):
     if data["languages_tags"][0] == "en:english":
         # assemble INSERT statements
         write_string = "INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES ("

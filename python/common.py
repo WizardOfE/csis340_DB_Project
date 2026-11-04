@@ -11,3 +11,9 @@ def parse_json(file_path):
                 except json.JSONDecodeError as e:
                     print(f"Error parsing line: {e}")
                     continue                   
+
+# creates file with begin
+def createOutFile(out_path):
+    o = open(out_path, 'r+')
+    o.write("begin;\n")
+    return o

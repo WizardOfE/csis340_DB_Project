@@ -2,8 +2,8 @@ import json
 import string
 import common
 
-filename = "other-items/additives.json"
-out_path = "test_data/additives_first_10.sql"
+filename = "../other-items/additives.json"
+out_path = "../test_data/additives_first_10.sql"
 json_field_names =  ["name",
                      "vegan",
                      "vegetarian"
@@ -16,8 +16,7 @@ bit_fields =        ["vegan",
 
 
 i = 0
-outfile = open(out_path, 'r+')
-outfile.write("begin;\n")
+outfile = common.createOutFile(out_path)
 # Usage
 for data in common.parse_json(filename):
     for obj in data:

@@ -1,8 +1,9 @@
 import json
 import string
+import common
 
-filename = "other-items/ingredients.json"
-out_path = "test_data/ingredients_first_10.sql"
+filename = "../other-items/ingredients.json"
+out_path = "../test_data/ingredients_first_10.sql"
 json_field_names = ["name",
                     "wikidata"
                     # "parents",
@@ -24,10 +25,9 @@ def parse_json(file_path):
                     continue
 
 i = 0
-outfile = open(out_path, 'a')
-outfile.write("begin;\n")
+outfile = common.createOutFile(out_path) # on shared thing to make things consistant
 # Usage
-for data in parse_json(filename):
+for data in common.parse_json(filename):
     for obj in data:
         if obj[0:2] == "en":
             write_string = "INSERT INTO ingredient (name, wikidata) VALUES ("

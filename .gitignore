@@ -6,3 +6,4 @@ ecosystem.config.js
 pgdata/
 /other-items/
 products.jsonl
+__pycache__/
