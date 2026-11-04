@@ -1,5 +1,4 @@
 begin;
-INSERT INTO food_ingredient (food_barcode, ingredient_name) values (0000764708617, 'opal-apple-cider');
 INSERT INTO food_ingredient (food_barcode, ingredient_name) values (0000764708617, 'cider');
 INSERT INTO food_ingredient (food_barcode, ingredient_name) values (0000764708617, 'alcohol');
 INSERT INTO food_nutrient (food_barcode, nutrient_name) values (0000764708617, 'energy');
