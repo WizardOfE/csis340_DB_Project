@@ -68,15 +68,15 @@ CREATE TABLE allergen (
 CREATE TABLE food_vitamin (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     food_barcode VARCHAR(255),
-    vitamin_id VARCHAR(255),
+    vitamin_name VARCHAR(255),
 
     constraint fk_product_barcode
         foreign key (food_barcode)
         references food_product(barcode),
 
     constraint fk_product_vitamin
-        foreign key (vitamin_id)
-        references vitamin(id)
+        foreign key (vitamin_name)
+        references vitamin(name)
 );
 
 
@@ -85,15 +85,15 @@ CREATE TABLE food_vitamin (
 CREATE TABLE food_ingredient (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     food_barcode VARCHAR(255),
-    ingredient_wikidata VARCHAR,
+    ingredient_name VARCHAR,
 
     constraint fk_product_barcode
         foreign key (food_barcode)
         references food_product(barcode),
 
     constraint fk_product_ingredient
-        foreign key (ingredient_wikidata)
-        references ingredient(wikidata)
+        foreign key (ingredient_name)
+        references ingredient(name)
 );
 
 
@@ -119,15 +119,15 @@ CREATE TABLE food_additive (
 CREATE TABLE food_nutrient (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     food_barcode VARCHAR(255),
-    nutrient_id VARCHAR,
+    nutrient_name VARCHAR,
 
     constraint fk_product_barcode
         foreign key (food_barcode)
         references food_product(barcode),
 
     constraint fk_product_nutrient
-        foreign key (nutrient_id)
-        references nutrient(id)
+        foreign key (nutrient_name)
+        references nutrient(name)
 );
 
 
@@ -136,14 +136,14 @@ CREATE TABLE food_nutrient (
 CREATE TABLE food_allergen (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     food_barcode VARCHAR(255),
-    allergen_wikidata VARCHAR,
+    allergen_name VARCHAR,
 
     constraint fk_product_barcode
         foreign key (food_barcode)
         references food_product(barcode),
     constraint fk_product_allergen
-        foreign key (allergen_wikidata)
-        references allergen(wikidata)
+        foreign key (allergen_name)
+        references allergen(name)
 );
 
 
