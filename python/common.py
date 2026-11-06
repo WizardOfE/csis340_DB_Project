@@ -23,8 +23,9 @@ def createOutFile(out_path):
     return o
 
 class DataWriter:
+    # constuctor (self, file we will write to, max chunk size of inserts, table name and columns)
     def __init__(self, outFile, MAX_CHUNKS, TABLE_NAME, COL_NAMES):
-        self.TABLE_NAME = TABLE_NAME
+        self.TABLE_NAME = TABLE_NAME # table name to write to
         self.COL_NAMES = COL_NAMES
         self.outFile = outFile
         self.MAX_CHUNKS = MAX_CHUNKS
@@ -34,13 +35,15 @@ class DataWriter:
 
     # add data. Will add to sql when needed
     def add(self, string):
+        # add and count
         self.values_holder.append(string)
         self.add_count += 1
 
+        # when array is full or at max, write to file
         if self.add_count >= self.MAX_CHUNKS:
             self.flush()
 
-    # send what is left over
+    # send what is left over or in array
     def flush(self):
         # create the join of array
         p = ",\n".join(self.values_holder)
@@ -49,6 +52,6 @@ class DataWriter:
         write_string = "INSERT INTO "+self.TABLE_NAME+" ("+self.COL_NAMES+") VALUES \n" + p + ";\n"
         self.outFile.write(write_string) # write out
         
-        # restart
+        # restart/prepare for next set of strings
         self.values_holder = []
         self.add_count = 0

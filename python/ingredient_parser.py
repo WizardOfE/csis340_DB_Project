@@ -18,8 +18,6 @@ i = 0
 outfile = createOutFile(out_path) # on shared thing to make things consistant
 
 MAX_CHUNKS = 100
-chunk_counter = 0
-first_layer_list = []
 
 ing_writer = DataWriter(outfile, MAX_CHUNKS, TABLE_NAME, COL_NAMES)
 
