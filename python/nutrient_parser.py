@@ -4,11 +4,12 @@ import common
 
 filename = "../other-items/nutrients.json"
 out_path = "../test_data/nutrient.sql"
+TABLE_NAME = "nutrient"
+COL_NAMES = "name, measuring_unit, wikidata"
+
 json_field_names = ["name",
                     "unit",
                     "wikidata"
-                    # "parents",
-                    # "children"
                     ]
 # non_string_fields = ["FIXME",
 #                      ]
@@ -23,7 +24,6 @@ chunk_counter = 0
 first_layer_list = []
 # Usage
 for data in common.parse_json(filename):
-
 
     for obj in data:
         if "zz:vit" not in obj:
@@ -44,7 +44,7 @@ for data in common.parse_json(filename):
                 p = ",\n".join(first_layer_list)
 
                 # create head + body + end
-                write_string = "INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES \n" + p + ";\n"
+                write_string = "INSERT INTO "+TABLE_NAME+" ("+COL_NAMES+") VALUES \n" + p + ";\n"
                 outfile.write(write_string) # write out
 
                 # restart
@@ -57,7 +57,7 @@ if len(first_layer_list):
     p = ",\n".join(first_layer_list)
 
     # create head + body + end
-    write_string = "INSERT INTO nutrient (name, measuring_unit, wikidata) VALUES \n" + p + ";\n"
+    write_string = "INSERT INTO "+TABLE_NAME+" ("+COL_NAMES+") VALUES \n" + p + ";\n"
     outfile.write(write_string) # write out
     
     
