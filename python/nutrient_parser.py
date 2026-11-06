@@ -17,10 +17,8 @@ json_field_names = ["name",
 i = 0
 outfile = common.createOutFile(out_path) # on shared thing to make things consistant
 
-MAX_CHUNKS = 100
-
+MAX_CHUNKS = 1000
 chunk_counter = 0
-
 first_layer_list = []
 # Usage
 for data in common.parse_json(filename):
@@ -36,9 +34,8 @@ for data in common.parse_json(filename):
                 
             row_out = "(" +",".join(second_layer_list)+ ")"
             first_layer_list.append(row_out)
-            # print(first_layer_list, chunk_counter)
             
-        
+            # if we have reached max
             if chunk_counter >= MAX_CHUNKS:
                 # create the join of array
                 p = ",\n".join(first_layer_list)

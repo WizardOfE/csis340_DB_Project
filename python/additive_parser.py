@@ -3,7 +3,9 @@ import string
 import common
 
 filename = "../other-items/additives.json"
-out_path = "../test_data/additives_first_10.sql"
+out_path = "../test_data/additives.sql"
+TABLE_NAME = "additive"
+COL_NAMES = "code, name, is_vegan, is_vegetarian"
 json_field_names =  ["name",
                      "vegan",
                      "vegetarian"
@@ -17,22 +19,48 @@ bit_fields =        ["vegan",
 
 i = 0
 outfile = common.createOutFile(out_path) # on shared thing to make things consistant
+
+MAX_CHUNKS = 1000
+chunk_counter = 0
+first_layer_list = []
 # Usage
 for data in common.parse_json(filename):
     for obj in data:
         if obj[0:2] == "en":
-            write_string = "INSERT INTO additive (name, is_vegan, is_vegetarian, code) VALUES ("
+            second_layer_list = []
+            #print(data[obj])
             for field in json_field_names:
-                write_string += "\'" if field not in non_string_fields else ""
                 if field in bit_fields:
-                    write_string += "1" if field in data[obj] and "en" in data[obj][field] else "0"
+                    second_layer_list.append("1" if not (field in data[obj] and "en" in data[obj][field]) else "0")
                 else:
-                    write_string += str(data[obj][field]["en"]).replace("'","''") if field in data[obj] and "en" in data[obj][field] else "unknown"
-                write_string += "\'" if field not in non_string_fields else ""
-                write_string += ", " if field != "vegetarian" else (", \'" + obj[4:] + "\');\n")
+                    second_layer_list.append('\''+obj[4:]+ '\'')
+                    second_layer_list.append(str('\'' +data[obj][field]["en"])+ '\''if field in data[obj] and "en" in data[obj][field] else "NULL")
+                #second_layer_list.append( ("\'" + obj[4:] + "\'") if field == "vegetarian" )
+                #print(obj[4:])
+            chunk_counter += 1
+                
+            row_out = "(" +",".join(second_layer_list)+ ")"
+            first_layer_list.append(row_out)
+            
 
-            write_string = write_string.replace("\'unknown\'", "NULL")
-            write_string = write_string.replace("unknown", "NULL")
-            outfile.write(write_string)
+            if chunk_counter >= MAX_CHUNKS:
+                # create the join of array
+                p = ",\n".join(first_layer_list)
 
+                # create head + body + end
+                write_string = "INSERT INTO "+TABLE_NAME+" ("+COL_NAMES+") VALUES \n" + p + ";\n"
+                outfile.write(write_string) # write out
+
+                # restart
+                first_layer_list = []
+                chunk_counter = 0
+
+# if not completed
+if len(first_layer_list):
+    # create the join of array
+    p = ",\n".join(first_layer_list)
+
+    # create head + body + end
+    write_string = "INSERT INTO "+TABLE_NAME+" ("+COL_NAMES+") VALUES \n" + p + ";\n"
+    outfile.write(write_string) # write out
 outfile.close()
