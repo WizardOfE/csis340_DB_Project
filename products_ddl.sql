@@ -72,11 +72,13 @@ CREATE TABLE food_vitamin (
 
     constraint fk_product_barcode
         foreign key (food_barcode)
-        references food_product(barcode),
+        references food_product(barcode)
+        ON UPDATE CASCADE ON DELETE CASCADE,
 
     constraint fk_product_vitamin
         foreign key (vitamin_name)
         references vitamin(name)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -89,11 +91,13 @@ CREATE TABLE food_ingredient (
 
     constraint fk_product_barcode
         foreign key (food_barcode)
-        references food_product(barcode),
+        references food_product(barcode)
+        ON UPDATE CASCADE ON DELETE CASCADE,
 
     constraint fk_product_ingredient
         foreign key (ingredient_name)
         references ingredient(name)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -106,11 +110,14 @@ CREATE TABLE food_additive (
 
     constraint fk_product_barcode
         foreign key (food_barcode)
-        references food_product(barcode),
+        references food_product(barcode)
+        ON UPDATE CASCADE ON DELETE CASCADE,
 
     constraint fk_product_additive
         foreign key (additive_code)
         references additive(code)
+        ON UPDATE CASCADE ON DELETE CASCADE
+
 );
 
 
@@ -123,11 +130,15 @@ CREATE TABLE food_nutrient (
 
     constraint fk_product_barcode
         foreign key (food_barcode)
-        references food_product(barcode),
+        references food_product(barcode)
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE,
 
     constraint fk_product_nutrient
         foreign key (nutrient_name)
         references nutrient(name)
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE
 );
 
 
@@ -140,10 +151,12 @@ CREATE TABLE food_allergen (
 
     constraint fk_product_barcode
         foreign key (food_barcode)
-        references food_product(barcode),
+        references food_product(barcode)
+        ON UPDATE CASCADE ON DELETE CASCADE,
     constraint fk_product_allergen
         foreign key (allergen_name)
         references allergen(name)
+        ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 

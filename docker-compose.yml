@@ -13,7 +13,7 @@ services:                 #defines all the containers (VMs) we want
   project-db:             #the name of a container (service) we are defining
     image: postgres:16    #the image (template) to build our container from i.e use vanilla postgres 16
     ports:                 
-      - "5435:5432"       # 'outside' port : 'inside' port i.e. traffic to the host os on 5434 is routed to
+      - "5434:5432"       # 'outside' port : 'inside' port i.e. traffic to the host os on 5434 is routed to
                           # port 5432 on this container
     env_file:
       - .env              # specify the name of the env file to look for
