@@ -3,7 +3,11 @@ import string
 import common
 
 filename = "../content/products.jsonl"
-out_path = "../test_data/products_first_10.sql"
+out_path = "../test_data/products.sql"
+
+TABLE_NAME = "food_product"
+COL_NAMES = "barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner"
+
 json_field_names = ["_id", 
                     "product_name",
                     "serving_size",
@@ -17,6 +21,10 @@ json_field_names = ["_id",
 i = 0
 outfile = common.createOutFile(out_path) # on shared thing to make things consistant
 
+MAX_CHUNKS = 500
+chunk_counter = 0
+first_layer_list = []
+
 # Usage
 for data in common.parse_json(filename):
     if "countries_tags" not in data: 
@@ -24,24 +32,47 @@ for data in common.parse_json(filename):
 
     # check if record is relevant (is english)
     if "en:united-states" in data["countries_tags"]:
+
+        second_layer_list = []
+
         # assemble INSERT statements
-        write_string = "INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES ("
+       # write_string = "INSERT INTO food_product (barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner) VALUES ("
         for field in json_field_names:
-            # add data[field] if exists, else add "unknown"
-            # + " for string fields
-            write_string += "" if (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score") else "\'"
-            # + field data
-            write_string += str(data[field]).replace("'", "''") if field in data else "unknown"
-            # + closing " for string fields
-            write_string += "" if (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score") else "\'"
-            # comma delimited but for the last field
-            write_string += ", " if field != "brand_owner" else ");\n"
-            # write_string += data["_id"] + ", " + data["product_name"] + ", " + data["serving_size"] + ", " + data["nutriscore_group"] + ", " + data[] + ", " + data["nova_group"] + ", " + data["ecoscore_score"] + ", " + data["brand_owner"]
-        # write to a file
+            o = str(data[field]).replace("'","''") if field in data else "NULL"
+            o = "\'" + o +"\'" if not (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score") else o
+           
+            second_layer_list.append( o)
+           
 
-        write_string = write_string.replace("\'unknown\'", "NULL")
-        write_string = write_string.replace("unknown", "NULL")
-        outfile.write(write_string)
+        chunk_counter += 1
+                
+        row_out = "(" +",".join(second_layer_list)+ ")"
+        first_layer_list.append(row_out)  
 
+        # if we have reached max
+        if chunk_counter >= MAX_CHUNKS:
+            # create the join of array
+            p = ",\n".join(first_layer_list)
+
+            # create head + body + end
+            write_string = "INSERT INTO "+TABLE_NAME+" ("+COL_NAMES+") VALUES \n" + p + ";\n"
+            outfile.write(write_string) # write out
+            
+            # restart
+            first_layer_list = []
+            chunk_counter = 0
+
+            # break if max
+            #break
+
+                
+# if not completed
+if len(first_layer_list):
+    # create the join of array
+    p = ",\n".join(first_layer_list)
+
+    # create head + body + end
+    write_string = "INSERT INTO "+TABLE_NAME+" ("+COL_NAMES+") VALUES \n" + p + ";\n"
+    outfile.write(write_string) # write out
 
 outfile.close()
