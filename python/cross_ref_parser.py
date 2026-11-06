@@ -7,11 +7,11 @@ add_filename = "../other-items/additives.json"
 all_filename = "../other-items/allergens.json"
 ing_filename = "../other-items/ingredients.json"
 nut_filename = "../other-items/nutrients.json"
-add_outfile = "../test_data/food_add_cross_ref_table_first_10.sql"
-all_outfile = "../test_data/food_all_cross_ref_table_first_10.sql"
-ing_outfile = "../test_data/food_ing_cross_ref_table_first_10.sql"
-nut_outfile = "../test_data/food_nut_cross_ref_table_first_10.sql"
-vit_outfile = "../test_data/food_vit_cross_ref_table_first_10.sql"
+add_outfile = "../test_data/food_add.sql"
+all_outfile = "../test_data/food_all.sql"
+ing_outfile = "../test_data/food_ing.sql"
+nut_outfile = "../test_data/food_nut.sql"
+vit_outfile = "../test_data/food_vit.sql"
 
 
 # load dicts of ingredient names
@@ -65,6 +65,11 @@ nutrient_out = common.createOutFile(nut_outfile)
 vitamin_out = common.createOutFile(vit_outfile)
 
 i = 0
+
+MAX_CHUNKS = 500
+chunk_counter = 0
+first_layer_list = []
+
 # Usage
 for data in common.parse_json(pro_filename):
     # # DEBUG: limiting products parsed
@@ -125,3 +130,43 @@ additive_out.close()
 ingredient_out.close()
 nutrient_out.close()
 vitamin_out.close()
+
+
+class dataholder:
+    def __init__(self, outFile, MAX_CHUNKS, TABLE_NAME, COL_NAMES):
+        self.TABLE_NAME = TABLE_NAME
+        self.COL_NAMES = COL_NAMES
+        self.outFile = outFile
+        self.MAX_CHUNKS = MAX_CHUNKS
+        self.add_count = 0
+        self.values_holder = [] # will hold (a,s,d,f) 
+
+
+    # add data. Will add to sql when needed
+    def add(self, string):
+        self.values_holder.append(string)
+        self.add_count += 1
+
+        if self.add_count >= self.MAX_CHUNKS:
+            # create the join of array
+            p = ",\n".join(self.values_holder)
+
+            # create head + body + end
+            write_string = "INSERT INTO "+TABLE_NAME+" ("+COL_NAMES+") VALUES \n" + p + ";\n"
+            self.outFile.write(write_string) # write out
+            
+            # restart
+            first_layer_list = []
+            chunk_counter = 0
+    # send what is left over
+    def flush(self):
+        # create the join of array
+        p = ",\n".join(self.values_holder)
+
+        # create head + body + end
+        write_string = "INSERT INTO "+TABLE_NAME+" ("+COL_NAMES+") VALUES \n" + p + ";\n"
+        self.outFile.write(write_string) # write out
+        
+        # restart
+        first_layer_list = []
+        chunk_counter = 0
