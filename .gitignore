@@ -12,3 +12,4 @@ pgdata/
 products.jsonl
 __pycache__/
 /test_data/
+bu.sql

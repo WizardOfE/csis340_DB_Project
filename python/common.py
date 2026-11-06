@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 def parse_json(file_path):
     """Parse JSON"""
@@ -14,6 +15,9 @@ def parse_json(file_path):
 
 # creates file with begin
 def createOutFile(out_path):
+
+    Path(out_path).touch()
+
     o = open(out_path, 'r+')
     o.write("begin;\n")
     return o

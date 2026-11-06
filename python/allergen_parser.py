@@ -2,8 +2,8 @@ import json
 import string
 import common
 
-filename = "other-items/allergens.json"
-out_path = "test_data/allergens_first_10.sql"
+filename = "../other-items/allergens.json"
+out_path = "../test_data/allergens_first_10.sql"
 json_field_names = ["name",
                     "wikidata"
                     # "parents",
@@ -28,11 +28,5 @@ for data in common.parse_json(filename):
             write_string = write_string.replace("unknown", "NULL")
             outfile.write(write_string)
 
-
-            # FIXME: DEBUG, limit results returned by loop
-            # if i == 10:
-            #     break
-            # else:
-            #     i += 1
 
 outfile.close()

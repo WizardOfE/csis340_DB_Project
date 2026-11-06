@@ -29,10 +29,6 @@ for data in common.parse_json(filename):
             outfile.write(write_string)
 
 
-            # FIXME: DEBUG, limit results returned by loop
-            # if i == 10:
-            #     break
-            # else:
-            #     i += 1
+        
 
 outfile.close()

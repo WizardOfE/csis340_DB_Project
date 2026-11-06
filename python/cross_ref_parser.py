@@ -3,10 +3,10 @@ import string
 import common
 
 pro_filename = "../content/products.jsonl"
-add_filename = "../content/additives.json"
-all_filename = "../content/allergens.json"
-ing_filename = "../content/ingredients.json"
-nut_filename = "../content/nutrients.json"
+add_filename = "../other-items/additives.json"
+all_filename = "../other-items/allergens.json"
+ing_filename = "../other-items/ingredients.json"
+nut_filename = "../other-items/nutrients.json"
 add_outfile = "../test_data/food_add_cross_ref_table_first_10.sql"
 all_outfile = "../test_data/food_all_cross_ref_table_first_10.sql"
 ing_outfile = "../test_data/food_ing_cross_ref_table_first_10.sql"
@@ -67,15 +67,17 @@ vitamin_out = common.createOutFile(vit_outfile)
 i = 0
 # Usage
 for data in common.parse_json(pro_filename):
-    # DEBUG: limiting products parsed
-    if i > 30:
-        break
-    else:
-        i += 1
+    # # DEBUG: limiting products parsed
+    # if i > 30:
+    #     break
+    # else:
+    #     i += 1
+
+    if "countries_tags" not in data: 
+        continue
 
     # check if record is relevant (is english)
     if "en:united-states" in data["countries_tags"]:
-
         # start filling set, use search strings, normalize found strings
         if "ingredients_tags" in data:
             for ingredient in data["ingredients_tags"]:
@@ -99,7 +101,10 @@ for data in common.parse_json(pro_filename):
                     allergen_out.write(write_string)
 
         if "sources" in data:
-            for element in data["sources"][0]["fields"]:
+            sources = data["sources"][0]
+            if "fields" not in sources: 
+                continue
+            for element in sources["fields"]:
                 if "nutrients" in element:
                     # field is vitamin
                     if "vitamin" in element:
