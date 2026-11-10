@@ -215,7 +215,50 @@ for data in common.parse_json(pro_filename):
                                 nut_chunk_count = 0
                     # write_string will have been edited, so write it
 
+# if not completed - additives
+if len(add_fll):
+    # create the join of array
+    p = ",\n".join(add_fll)
 
+    # create head + body + end
+    write_string = "INSERT INTO "+ADD_TABLE_NAME+" ("+ADD_COL_NAMES+") VALUES \n" + p + ";\n"
+    add_outfile.write(write_string) # write out
+
+# if not completed - allergens
+if len(all_fll):
+    # create the join of array
+    p = ",\n".join(all_fll)
+
+    # create head + body + end
+    write_string = "INSERT INTO "+ALL_TABLE_NAME+" ("+ALL_COL_NAMES+") VALUES \n" + p + ";\n"
+    all_outfile.write(write_string) # write out
+
+# if not completed - ingredients
+if len(ing_fll):
+    # create the join of array
+    p = ",\n".join(ing_fll)
+
+    # create head + body + end
+    write_string = "INSERT INTO "+ING_TABLE_NAME+" ("+ING_COL_NAMES+") VALUES \n" + p + ";\n"
+    ing_outfile.write(write_string) # write out
+
+# if not completed - nutrients
+if len(nut_fll):
+    # create the join of array
+    p = ",\n".join(nut_fll)
+
+    # create head + body + end
+    write_string = "INSERT INTO "+NUT_TABLE_NAME+" ("+NUT_COL_NAMES+") VALUES \n" + p + ";\n"
+    nut_outfile.write(write_string) # write out
+
+# if not completed - vitamins
+if len(vit_fll):
+    # create the join of array
+    p = ",\n".join(vit_fll)
+
+    # create head + body + end
+    write_string = "INSERT INTO "+VIT_TABLE_NAME+" ("+VIT_COL_NAMES+") VALUES \n" + p + ";\n"
+    vit_outfile.write(write_string) # write out
 
 allergen_out.close()
 additive_out.close()
