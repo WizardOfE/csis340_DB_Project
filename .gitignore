@@ -10,6 +10,7 @@ ecosystem.config.js
 pgdata/
 /other-items/
 products.jsonl
+products.jsonl.gz
 __pycache__/
 /test_data/
 bu.sql
