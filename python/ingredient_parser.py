@@ -5,7 +5,7 @@ from common import *
 filename = "../other-items/ingredients.json"
 out_path = "../test_data/ingredients.sql"
 TABLE_NAME = "ingredient"
-COL_NAMES = "name, wikidata"
+COL_NAMES = "name, title, wikidata"
 json_field_names = ["name",
                     "wikidata"
                     # "parents",
@@ -27,6 +27,8 @@ for data in parse_json(filename):
         if obj[0:2] == "en":
 
             second_layer_list = []
+
+            second_layer_list.append( "\'" + str(obj[3:]) + "\'" )
 
             for field in json_field_names:
                 second_layer_list.append( "\'" + str(data[obj][field]["en"]).replace("'", "''") + "\'" if field in data[obj] and "en" in data[obj][field] else "NULL")
