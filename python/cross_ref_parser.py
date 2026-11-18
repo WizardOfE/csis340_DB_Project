@@ -19,13 +19,13 @@ NUT_COL_NAMES = "food_barcode, nutrient_name"
 VIT_TABLE_NAME = "food_vitamin"
 VIT_COL_NAMES = "food_barcode, vitamin_name"
 
-MAX_CHUNK = 100
+MAX_CHUNK = 2500
 
-add_outfile = "../test_data/food_add_cross_ref_table_first_10.sql"
-all_outfile = "../test_data/food_all_cross_ref_table_first_10.sql"
-ing_outfile = "../test_data/food_ing_cross_ref_table_first_10.sql"
-nut_outfile = "../test_data/food_nut_cross_ref_table_first_10.sql"
-vit_outfile = "../test_data/food_vit_cross_ref_table_first_10.sql"
+add_outfile = "../test_data/food_add_cross.sql"
+all_outfile = "../test_data/food_all_cross.sql"
+ing_outfile = "../test_data/food_ing_cross.sql"
+nut_outfile = "../test_data/food_nut_cross.sql"
+vit_outfile = "../test_data/food_vit_cross.sql"
 
 ing_chunk_count = 0
 all_chunk_count = 0
@@ -110,10 +110,12 @@ for data in common.parse_json(pro_filename):
             for ingredient in data["ingredients_tags"]:
                 if ingredient[3:] in possible_ingredients:
                     # take results set and create write strings
-                    ing_fll.append(f"({data["_id"]}, \'{ingredient[3:]}\')")
+                    o = f"{ingredient[3:]}".replace("'", "''")
+
+                    ing_fll.append(f"({data["_id"]}, \'{o}\')")
                     ing_chunk_count += 1
 
-                    if ing_chunk_count >= MAX_CHUNKS:
+                    if ing_chunk_count >= MAX_CHUNK:
                         # create the join of array
                         p = ",\n".join(ing_fll)
 
@@ -131,10 +133,12 @@ for data in common.parse_json(pro_filename):
                     # write_string = f"INSERT INTO food_additive (food_barcode, additive_code) values ({data["_id"]}, '{additive[4:]}');\n"
                     # additive_out.write(write_string)
 
-                    add_fll.append(f"({data["_id"]}, \'{additive[4:]}\')")
+                    o = f"{additive[4:]}".replace("'", "''")
+
+                    add_fll.append(f"({data["_id"]}, \'{o}\')")
                     add_chunk_count += 1
 
-                    if add_chunk_count >= MAX_CHUNKS:
+                    if add_chunk_count >= MAX_CHUNK:
                         # create the join of array
                         p = ",\n".join(add_fll)
 
@@ -151,11 +155,12 @@ for data in common.parse_json(pro_filename):
                 if allergen[3:] in possible_allergens:
                     # write_string = f"INSERT INTO food_allergen (food_barcode, allergen_name) values ({data["_id"]}, '{allergen[3:]}');\n"
                     # allergen_out.write(write_string)
+                    o = f"{allergen[3:]}".replace("'", "''")
 
-                    all_fll.append(f"({data["_id"]}, \'{allergen[3:]}\')")
+                    all_fll.append(f"({data["_id"]}, \'{o}\')")
                     all_chunk_count += 1
 
-                    if all_chunk_count >= MAX_CHUNKS:
+                    if all_chunk_count >= MAX_CHUNK:
                         # create the join of array
                         p = ",\n".join(all_fll)
 
@@ -177,12 +182,13 @@ for data in common.parse_json(pro_filename):
                     if "vitamin" in element:
                         if element[10:] in possible_vitamins:
                             # write_string = f"INSERT INTO food_vitamin (food_barcode, vitamin_name) values ({data["_id"]}, '{element[10:]}');\n"
+                            o = f"{element[10:]}".replace("'", "''")
                             # vitamin_out.write(write_string)
 
-                            vit_fll.append(f"({data["_id"]}, \'{element[10:]}\')")
+                            vit_fll.append(f"({data["_id"]}, \'{o}\')")
                             vit_chunk_count += 1
 
-                            if vit_chunk_count >= MAX_CHUNKS:
+                            if vit_chunk_count >= MAX_CHUNK:
                                 # create the join of array
                                 p = ",\n".join(vit_fll)
 
@@ -198,11 +204,12 @@ for data in common.parse_json(pro_filename):
                         if element[10:] in possible_nutrients:
                             # write_string = f"INSERT INTO food_nutrient (food_barcode, nutrient_name) values ({data["_id"]}, '{element[10:]}');\n"
                             # nutrient_out.write(write_string)
+                            o = f"{element[10:]}".replace("'", "''")
 
-                            nut_fll.append(f"({data["_id"]}, \'{element[10:]}\')")
+                            nut_fll.append(f"({data["_id"]}, \'{o}\')")
                             nut_chunk_count += 1
 
-                            if nut_chunk_count >= MAX_CHUNKS:
+                            if nut_chunk_count >= MAX_CHUNK:
                                 # create the join of array
                                 p = ",\n".join(nut_fll)
 
@@ -222,7 +229,7 @@ if len(add_fll):
 
     # create head + body + end
     write_string = "INSERT INTO "+ADD_TABLE_NAME+" ("+ADD_COL_NAMES+") VALUES \n" + p + ";\n"
-    add_outfile.write(write_string) # write out
+    additive_out.write(write_string) # write out
 
 # if not completed - allergens
 if len(all_fll):
@@ -231,7 +238,7 @@ if len(all_fll):
 
     # create head + body + end
     write_string = "INSERT INTO "+ALL_TABLE_NAME+" ("+ALL_COL_NAMES+") VALUES \n" + p + ";\n"
-    all_outfile.write(write_string) # write out
+    allergen_out.write(write_string) # write out
 
 # if not completed - ingredients
 if len(ing_fll):
@@ -240,7 +247,7 @@ if len(ing_fll):
 
     # create head + body + end
     write_string = "INSERT INTO "+ING_TABLE_NAME+" ("+ING_COL_NAMES+") VALUES \n" + p + ";\n"
-    ing_outfile.write(write_string) # write out
+    ingredient_out.write(write_string) # write out
 
 # if not completed - nutrients
 if len(nut_fll):
@@ -249,7 +256,7 @@ if len(nut_fll):
 
     # create head + body + end
     write_string = "INSERT INTO "+NUT_TABLE_NAME+" ("+NUT_COL_NAMES+") VALUES \n" + p + ";\n"
-    nut_outfile.write(write_string) # write out
+    nutrient_out.write(write_string) # write out
 
 # if not completed - vitamins
 if len(vit_fll):
@@ -258,7 +265,7 @@ if len(vit_fll):
 
     # create head + body + end
     write_string = "INSERT INTO "+VIT_TABLE_NAME+" ("+VIT_COL_NAMES+") VALUES \n" + p + ";\n"
-    vit_outfile.write(write_string) # write out
+    vitamin_out.write(write_string) # write out
 
 allergen_out.close()
 additive_out.close()

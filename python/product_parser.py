@@ -3,7 +3,7 @@ import string
 import common
 
 filename = "../content/products.jsonl"
-out_path = "../test_data/products_first_10.sql"
+out_path = "../test_data/product.sql"
 json_field_names = ["_id", 
                     "product_name",
                     "serving_size",
@@ -36,19 +36,21 @@ for data in common.parse_json(filename):
             if (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score"):
                 # int fields
                 if field in data:
-                    sll.append(data[field])
+                    sll.append(f"{data[field]}".replace("'", "''"))
                 else:
                     sll.append("NULL")
             else:
                 if field in data:
-                    sll.append(f"'{data[field]}'")
+                    o = f"{data[field]}".replace("'", "''")
+
+                    sll.append("'" + o + "'")
                 else:
                     sll.append("NULL")
                 # string fields
 
         # write to a file
         chunk_counter += 1
-        row_out = "(" +",".join(second_layer_list)+ ")"
+        row_out = "(" + ",".join(sll) + ")"
         first_layer_list.append(row_out) 
 
         

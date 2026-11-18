@@ -14,3 +14,4 @@ products.jsonl.gz
 __pycache__/
 /test_data/
 bu.sql
+connect.txt

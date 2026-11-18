@@ -3,7 +3,7 @@ from pathlib import Path
 
 def parse_json(file_path):
     """Parse JSON"""
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding="utf-8") as file:
         for line in file:
             line = line.strip()
             if line:
@@ -18,7 +18,7 @@ def createOutFile(out_path):
 
     Path(out_path).touch()
 
-    o = open(out_path, 'r+')
+    o = open(out_path, 'r+', encoding="utf-8")
     o.write("begin;\n")
     return o
 
