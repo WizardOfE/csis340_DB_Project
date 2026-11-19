@@ -32,6 +32,7 @@ CREATE TABLE vitamin (
 
 CREATE TABLE ingredient (
     name varchar primary key,
+    title varchar,
     wikidata varchar
 );
 
