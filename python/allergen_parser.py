@@ -2,13 +2,13 @@ import json
 import string
 import common
 
-filename = "../other-items/allergens.json"
+filename = "../content/allergens.json"
 out_path = "../test_data/allergens.sql"
 
 TABLE_NAME = "allergen"
 COL_NAMES = "name, wikidata"
 
-json_field_names = ["name",
+json_field_names = [#"name",
                     "wikidata"
                     # "parents",
                     # "children"
@@ -28,6 +28,7 @@ for data in common.parse_json(filename):
     for obj in data:
         if obj[0:2] == "en":
             second_layer_list = []
+            second_layer_list.append("\'" + str(obj)[3:] + "\'")
             for field in json_field_names:
                 second_layer_list.append("\'" + str(data[obj][field]["en"]).replace("'", "''") + "\'" if field in data[obj] and "en" in data[obj][field] else "NULL")
             chunk_counter += 1

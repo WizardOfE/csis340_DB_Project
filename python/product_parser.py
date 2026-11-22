@@ -3,8 +3,8 @@ import string
 import common
 
 filename = "../content/products.jsonl"
-out_path = "../test_data/product.sql"
-json_field_names = ["_id", 
+out_path = "../test_data/products.sql"
+json_field_names = ["code", 
                     "product_name",
                     "serving_size",
                     "nutriscore_group",
@@ -13,7 +13,7 @@ json_field_names = ["_id",
                     "ecoscore_score",
                     "brand_owner"
                     ]
-TABLE_NAME = "product"
+TABLE_NAME = "food_product"
 COL_NAMES = "barcode, name, serving_size, ns_grade, ns_point, nova_group, ecoscore, brand_owner"
 
 outfile = common.createOutFile(out_path) # on shared thing to make things consistant
@@ -33,7 +33,7 @@ for data in common.parse_json(filename):
         sll = []
 
         for field in json_field_names:
-            if (field == "_id" or field == "nutriscore_score" or field == "ecoscore_score"):
+            if (field == "nutriscore_score" or field == "ecoscore_score"):
                 # int fields
                 if field in data:
                     sll.append(f"{data[field]}".replace("'", "''"))

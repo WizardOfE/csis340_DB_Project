@@ -3,10 +3,10 @@ import string
 import common
 
 pro_filename = "../content/products.jsonl"
-add_filename = "../other-items/additives.json"
-all_filename = "../other-items/allergens.json"
-ing_filename = "../other-items/ingredients.json"
-nut_filename = "../other-items/nutrients.json"
+add_filename = "../content/additives.json"
+all_filename = "../content/allergens.json"
+ing_filename = "../content/ingredients.json"
+nut_filename = "../content/nutrients.json"
 
 ING_TABLE_NAME = "food_ingredient"
 ING_COL_NAMES = "food_barcode, ingredient_name"
@@ -45,8 +45,9 @@ possible_ingredients = {}
 ing_count = 0
 for ing_data in common.parse_json(ing_filename):
     for ing_name in ing_data:
-        possible_ingredients[ing_name[3:]] = True
-        ing_count += 1
+        if ing_name[0:2] == "en":
+            possible_ingredients[ing_name[3:]] = True
+            ing_count += 1
 
 # load dicts of additive names
 possible_additives = {}
@@ -112,7 +113,7 @@ for data in common.parse_json(pro_filename):
                     # take results set and create write strings
                     o = f"{ingredient[3:]}".replace("'", "''")
 
-                    ing_fll.append(f"({data["_id"]}, \'{o}\')")
+                    ing_fll.append(f"('{data["code"]}', \'{o}\')")
                     ing_chunk_count += 1
 
                     if ing_chunk_count >= MAX_CHUNK:
@@ -135,7 +136,7 @@ for data in common.parse_json(pro_filename):
 
                     o = f"{additive[4:]}".replace("'", "''")
 
-                    add_fll.append(f"({data["_id"]}, \'{o}\')")
+                    add_fll.append(f"('{data["code"]}', \'{o}\')")
                     add_chunk_count += 1
 
                     if add_chunk_count >= MAX_CHUNK:
@@ -157,7 +158,7 @@ for data in common.parse_json(pro_filename):
                     # allergen_out.write(write_string)
                     o = f"{allergen[3:]}".replace("'", "''")
 
-                    all_fll.append(f"({data["_id"]}, \'{o}\')")
+                    all_fll.append(f"('{data["code"]}', \'{o}\')")
                     all_chunk_count += 1
 
                     if all_chunk_count >= MAX_CHUNK:
@@ -185,7 +186,7 @@ for data in common.parse_json(pro_filename):
                             o = f"{element[10:]}".replace("'", "''")
                             # vitamin_out.write(write_string)
 
-                            vit_fll.append(f"({data["_id"]}, \'{o}\')")
+                            vit_fll.append(f"('{data["code"]}', \'{o}\')")
                             vit_chunk_count += 1
 
                             if vit_chunk_count >= MAX_CHUNK:
@@ -206,7 +207,7 @@ for data in common.parse_json(pro_filename):
                             # nutrient_out.write(write_string)
                             o = f"{element[10:]}".replace("'", "''")
 
-                            nut_fll.append(f"({data["_id"]}, \'{o}\')")
+                            nut_fll.append(f"('{data["code"]}', \'{o}\')")
                             nut_chunk_count += 1
 
                             if nut_chunk_count >= MAX_CHUNK:

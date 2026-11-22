@@ -2,12 +2,12 @@ import json
 import string
 import common
 
-filename = "../other-items/nutrients.json"
-out_path = "../test_data/nutrient.sql"
+filename = "../content/nutrients.json"
+out_path = "../test_data/nutrients.sql"
 TABLE_NAME = "nutrient"
 COL_NAMES = "name, measuring_unit, wikidata"
 
-json_field_names = ["name",
+json_field_names = [#"name",
                     "unit",
                     "wikidata"
                     ]
@@ -30,6 +30,7 @@ for data in common.parse_json(filename):
 
             # to build the string of data for this obj
             second_layer_list = []
+            second_layer_list.append("\'" + str(obj)[3:] + "\'")
             for field in json_field_names:
                 second_layer_list.append("\'" + str(data[obj][field]["en"]).replace("'", "''") + "\'" if field in data[obj] and "en" in data[obj][field] else "NULL")
             row_out = "(" +",".join(second_layer_list)+ ")"

@@ -2,7 +2,7 @@ import json
 import string
 from common import *
 
-filename = "../other-items/ingredients.json"
+filename = "../content/ingredients.json"
 out_path = "../test_data/ingredients.sql"
 TABLE_NAME = "ingredient"
 COL_NAMES = "name, title, wikidata"
