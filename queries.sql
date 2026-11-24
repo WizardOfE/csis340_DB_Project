@@ -8,7 +8,7 @@ select name from food_product where name like '%Walker%';
 -- 4 done
 select * from additive where is_vegan = '1';
 -- 5 done
-select brand_name, count(brand_name) from food_product group by brand_name having count(brand_name) > 99;
+select brand_owner, count(brand_owner) from food_product group by brand_owner having count(brand_owner) > 99;
 
 -- 6 interpreting "average" NOVA group as "mode" TODO: unfinished
 select brand_name, nova_group as mode_nova_group from (
