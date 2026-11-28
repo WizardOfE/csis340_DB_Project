@@ -11,6 +11,7 @@ select * from additive where is_vegan = '1';
 select brand_owner, count(brand_owner) from food_product group by brand_owner having count(brand_owner) > 99;
 
 -- 6 interpreting "average" NOVA group as "mode" TODO: unfinished
+-- What is the average NOVA group of each brands products?
 select brand_name, nova_group as mode_nova_group from (
   select brand_name, nova_group, count(nova_group) as foo from food_product group by nova_group, brand_name
 )  
@@ -19,9 +20,22 @@ select brand_name, nova_group as mode_nova_group from (
 select additive_code, count(additive_code) as count_adds from food_additive group by additive_code order by count_adds desc limit 1;
 
 -- 8 need to change how average is found ig TODO: unfinished
-select food_additive.food_barcode, avg(food_product.ns_point) from food_additive 
-join food_product on food_product.barcode = food_additive.food_barcode
-group by food_barcode having count(food_additive.food_barcode) > avg(food_additive.food_barcode);
+-- For those products with more additives than average, what is the average NOVA score?
+SELECT 
+    avg(fp.ecoscore)
+FROM (
+    SELECT 
+        food_barcode, 
+        count(additive_code) as additive_count 
+    FROM food_additive 
+    GROUP BY food_barcode
+    HAVING count(additive_code) > (
+        SELECT avg(cnt) FROM (
+            SELECT food_barcode, count(additive_code) as cnt FROM food_additive GROUP BY food_barcode
+        )
+    ) 
+) as selected_abv_avg
+JOIN food_product fp ON fp.barcode = selected_abv_avg.food_barcode
 
 -- 9 done
 select ingredient_name from food_ingredient group by ingredient_name having count(ingredient_name) > 999;
@@ -60,7 +74,7 @@ select name from food_product where barcode in (
   )
 );
 
--- 14
+-- 14 For each vitamin's associated products, what is the average nutriscore, averge number of ingredients, and average number of additives?
 -- TODO: skipped
 
 -- 15 done
@@ -87,10 +101,11 @@ and food_allergen.allergen_name in (
 ) 
 group by food_product.name;
 
--- 18
+-- 18 Which ingredients and allergens have 100 products in common?
 -- TODO: skipped
 
 -- 19
+-- Which products have all but one vegan ingredients? For example, product A has 10 ingredients, 9 are vegan, 1 is not so it qualifies. Product B has 5 ingredients, 3 are vegan but 2 are not, it does not qualify.
 -- TODO: skipped
 
 -- 20 done
