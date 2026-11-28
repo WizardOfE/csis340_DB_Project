@@ -102,7 +102,15 @@ and food_allergen.allergen_name in (
 group by food_product.name;
 
 -- 18 Which ingredients and allergens have 100 products in common?
--- TODO: skipped
+SELECT
+    fi.ingredient_name,
+    fa.allergen_name,
+    count(fi.food_barcode) AS common_count
+FROM food_ingredient fi
+JOIN food_allergen fa
+    ON fi.food_barcode = fa.food_barcode
+GROUP BY fi.ingredient_name, fa.allergen_name
+HAVING count(DISTINCT fi.food_barcode) = 100;
 
 -- 19
 -- Which products have all but one vegan ingredients? For example, product A has 10 ingredients, 9 are vegan, 1 is not so it qualifies. Product B has 5 ingredients, 3 are vegan but 2 are not, it does not qualify.
